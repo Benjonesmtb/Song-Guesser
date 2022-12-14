@@ -95,25 +95,28 @@ def main(selectSong, splitCSV):
     db.close()
 
 # Menue System
-while True:
-    print("Welcome to a song guesser")
-    print("Enter the number you select:")
-    print("1 - Guess a song")
-    print("2 - Check a Users Score")
-    print("3 - Top 5 scores")
-    print("4 - Exit")
+def menue(splitCSV, selectSong, checkScore, topFive, main):
+    while True:
+        print("Welcome to a song guesser")
+        print("Enter the number you select:")
+        print("1 - Guess a song")
+        print("2 - Check a Users Score")
+        print("3 - Top 5 scores")
+        print("4 - Exit")
     
-    choice = input("Choice: ")
-    if choice == '1':
-        main(selectSong, splitCSV)
+        choice = input("Choice: ")
+        if choice == '1':
+            main(selectSong, splitCSV)
 
-    elif choice == '2':
-        print(checkScore())
-    elif choice == '3':
-        topFive()
-    elif choice == '4':
-        break
-    else:
-        print("Invalid please try again")
-    print()
-    time.sleep(1)
+        elif choice == '2':
+            print(checkScore())
+        elif choice == '3':
+            topFive()
+        elif choice == '4':
+            break
+        else:
+            print("Invalid please try again")
+        print()
+        time.sleep(1)
+
+menue(splitCSV, selectSong, checkScore, topFive, main)
