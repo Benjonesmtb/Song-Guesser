@@ -19,6 +19,7 @@ def selectSong(songs):
     return selectedSong
 
 def checkScore():
+    print()
     db = sqlite3.connect('login.db')
     cursor = db.cursor()
     username = input('Enter your username: ')
@@ -30,17 +31,22 @@ def checkScore():
     return row[3]
 
 def topFive():
+    print()
     db = sqlite3.connect('login.db')
     cursor = db.cursor()
-    cursor.execute('''SELECT * FROM users ORDER BY score ASC LIMIT 5''')
-    for i in range(3):
+    cursor.execute('''SELECT * FROM users ORDER BY score DESC LIMIT 5''')
+    array = []
+    for i in range(5):
         row = cursor.fetchone()
-        print(row[1] , "-", row[3])
+        array.append([row[1] , "-", row[3]])
+    sorted_array = sorted(array, key=lambda x: x[2])
+    for i in range(5):
+        print(sorted_array[-i-1][0] , sorted_array[-i-1][1] , sorted_array[-i-1][2])
     db.commit()
     db.close()
-    return row
 
 def main(selectSong, splitCSV):
+    print()
     songs = splitCSV()
     db = sqlite3.connect('login.db')
     cursor = db.cursor()
@@ -94,7 +100,7 @@ while True:
     print("Enter the number you select:")
     print("1 - Guess a song")
     print("2 - Check a Users Score")
-    print("3 - Top 5 songs")
+    print("3 - Top 5 scores")
     print("4 - Exit")
     
     choice = input("Choice: ")
